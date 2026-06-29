@@ -1,0 +1,9 @@
+- Understanding NPM (Node Package Manager)
+- Installing and uninstalling packages (basic & advanced)
+- Understanding the purpose of the node_modules folder
+- Managing project dependencies
+- Working with devDependencies
+- Understanding default npm scripts and creating custom scripts
+- Learning how the PATH works while running npm scripts
+
+
