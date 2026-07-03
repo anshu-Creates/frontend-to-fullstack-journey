@@ -16,6 +16,11 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+app.get("/profile/:username/:age", function (req, res) {
+  res.send(`Welcome ${req.params.username}. Your Age is ${req.params.age}`);
+});
+
 app.listen(3000, () => {
   console.log("Server is running on http://localhost:3000");
 });
+
