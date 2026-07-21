@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Users</title>
+  </head>
+  <body>
+    <div id="container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+      async function loadUsers() {
+        const response = await axios.get("/users");
+
+        const users = response.data;
+
+        const container = document.getElementById("container");
+
+        users.forEach((user) => {
+          container.innerHTML += `
+            <div class="card">
+
+                <h2>${user.name}</h2>
+
+                <p>${user.email}</p>
+
+                <p>${user.age}</p>
+
+            </div>
+        `;
+        });
+      }
+
+      loadUsers();
+    </script>
+  </body>
+</html>

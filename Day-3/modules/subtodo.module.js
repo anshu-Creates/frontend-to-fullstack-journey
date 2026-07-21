@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const subtodoSchema = new mongoose.Schema(
   {
     title: {
-      typpe: String,
+      type: String,
       required: true,
     },
     complete: {
