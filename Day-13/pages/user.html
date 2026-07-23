@@ -1,12 +1,19 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>User</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>User Profile</h1>
     <p>Welcome, John Doe!</p>
-</body>
+    <input type="button" value="Logout" onclick="logout()" />
+    <script>
+      function logout() {
+        localStorage.removeItem("token");
+        window.location.href = "/login";
+      }
+    </script>
+  </body>
 </html>
