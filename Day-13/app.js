@@ -33,10 +33,6 @@ app.post("/register", async (req, res) => {
         });
 
         console.log("User created");
-
-        var token = jwt.sign({ email: newUser.email }, 'shhhhh');
-        
-        res.cookie('token', token);
         console.log("Redirecting to login");
         res.redirect("/login");
     });
@@ -56,6 +52,10 @@ app.post("/login", async (req, res) => {
     } else {
         bcrypt.compare(password, user.password, function (err, result) {
             if (result) {
+                var token = jwt.sign({ email: user.email }, 'shhhhh');
+                console.log("Token generated");
+                res.cookie('token', token);
+                console.log("Token set in cookie");
                 console.log("Login successful");
                 res.redirect("/user");
             } else {
@@ -66,9 +66,26 @@ app.post("/login", async (req, res) => {
     }
 });
 
-app.get("/user", (req, res) => {
+app.get("/user", isLoggedin, (req, res) => {
+    console.log(req.user);
     res.sendFile("/pages/user.html", { root: __dirname });
 });
+
+function isLoggedin(req, res, next) {
+    const token = req.cookies.token;
+    if (!token) {
+        return res.status(401).send("Access denied");
+    } else {
+        jwt.verify(token, 'shhhhh', function (err, decoded) {
+            if (err) {
+                return res.status(401).send("Access denied");
+            }
+            req.user = decoded;
+            next();
+        });
+    }
+
+}
 
 app.listen(3000, () => {
     console.log("Server is running on port 3000");
